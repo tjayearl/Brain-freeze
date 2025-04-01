@@ -1,0 +1,44 @@
+{
+    "iceCream": [
+        {
+            "name": "Vanilla Delight",
+            "description": "Classic creamy vanilla flavor.",
+            "price": 4.99,
+            "image": "https://img.freepik.com/free-photo/ice-cream-balls-bowl_1220-571.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Chocolate Heaven",
+            "description": "Rich and creamy chocolate ice cream.",
+            "price": 5.49,
+            "image": "https://img.freepik.com/free-photo/delicious-ice-cream-studio_23-2150696580.jpg?semt=ais_hybrid"
+        }
+    ],
+    "chocolate": [
+        {
+            "name": "Dark Chocolate Bar",
+            "description": "Bitter-sweet dark chocolate.",
+            "price": 3.99,
+            "image": "https://img.freepik.com/free-photo/delicious-chocolate-bar-wrapped-golden-foil-white-background_23-2147898347.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Milk Chocolate Bar",
+            "description": "Smooth and creamy milk chocolate.",
+            "price": 4.29,
+            "image": "https://img.freepik.com/free-photo/flat-lay-creative-chocolate-composition-dark-background_23-2148549326.jpg?semt=ais_hybrid"
+        }
+    ],
+    "candy": [
+        {
+            "name": "Gummy Bears",
+            "description": "Chewy and fruity gummy bears.",
+            "price": 2.99,
+            "image": "https://img.freepik.com/free-photo/still-life-colorful-gummy-bears_23-2149870813.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Lollipops",
+            "description": "Sweet and long-lasting lollipops.",
+            "price": 1.99,
+            "image": "https://img.freepik.com/premium-photo/colorful-lollipops-sticks-isolated-white-background_1166138-192.jpg?semt=ais_hybrid"
+        }
+    ]
+}
