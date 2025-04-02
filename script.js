@@ -6,6 +6,24 @@ document.addEventListener("DOMContentLoaded", () => {
             displayProducts(data.chocolate, "chocolate-list");
             displayProducts(data.candy, "candy-list");
         });
+
+    // Header Disappearing Effect
+    let lastScrollTop = 0;
+    const header = document.querySelector("header");
+
+    window.addEventListener("scroll", () => {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 100) {  // Start disappearing after scrolling 100px
+            header.style.opacity = Math.max(1 - scrollTop / 300, 0); // Gradually fade out
+            header.style.transform = `translateY(-${Math.min(scrollTop / 2, 100)}px)`; // Move up slightly
+        } else {
+            header.style.opacity = 1;
+            header.style.transform = "translateY(0)";
+        }
+
+        lastScrollTop = scrollTop;
+    });
 });
 
 function displayProducts(products, elementId) {
