@@ -45,6 +45,13 @@ nav ul li a {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.product span{
+    font-weight: bold;
+    color: #007bff;
+    display: block;
+    margin-bottom: 10px;
+}
+
 .product img {
     width: 150px;
     height: 150px;
@@ -60,4 +67,16 @@ nav ul li a {
 .product span {
     font-weight: bold;
     color: #007bff;
+}
+
+.cart-button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.cart-button img {
+    width: 30px;
+    height: 30px;
 }
