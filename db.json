@@ -11,6 +11,24 @@
             "description": "Rich and creamy chocolate ice cream.",
             "price": 5.49,
             "image": "https://img.freepik.com/free-photo/delicious-ice-cream-studio_23-2150696580.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Strawberry Bliss",
+            "description": "Fresh strawberry flavor with real fruit pieces.",
+            "price": 5.99,
+            "image": "https://img.freepik.com/free-photo/delicious-ice-cream-with-topping_23-2150735500.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Mint Chocolate Chip",
+            "description": "Refreshing mint ice cream with chocolate chips.",
+            "price": 5.49,
+            "image": "https://img.freepik.com/free-photo/delicious-green-ice-cream-still-life_23-2150096630.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Cookie Dough",
+            "description": "Vanilla ice cream with cookie dough chunks.",
+            "price": 6.49,
+            "image": "https://img.freepik.com/free-photo/chocolate-chips-cookie-dough-bowl_23-2149556877.jpg?semt=ais_hybrid"
         }
     ],
     "chocolate": [
@@ -25,6 +43,24 @@
             "description": "Smooth and creamy milk chocolate.",
             "price": 4.29,
             "image": "https://img.freepik.com/free-photo/flat-lay-creative-chocolate-composition-dark-background_23-2148549326.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "White Chocolate Bar",
+            "description": "Sweet and creamy white chocolate.",
+            "price": 4.49,
+            "image": "https://img.freepik.com/free-photo/close-up-delicious-white-chocolate-bar_23-2150660959.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Chocolate Truffles",
+            "description": "Decadent chocolate truffles with various fillings.",
+            "price": 7.99,
+            "image": "https://img.freepik.com/premium-photo/sweet-balls-organic-farm-goat-cheese-close-up_351987-245.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Chocolate-Covered Almonds",
+            "description": "Crunchy almonds coated in rich chocolate.",
+            "price": 5.99,
+            "image": "https://img.freepik.com/premium-photo/close-up-choclate-almonds-table_1048944-24357130.jpg?semt=ais_hybrid"
         }
     ],
     "candy": [
@@ -39,6 +75,24 @@
             "description": "Sweet and long-lasting lollipops.",
             "price": 1.99,
             "image": "https://img.freepik.com/premium-photo/colorful-lollipops-sticks-isolated-white-background_1166138-192.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Chocolate-Covered Pretzels",
+            "description": "Salty pretzels coated in chocolate.",
+            "price": 4.99,
+            "image": "https://img.freepik.com/premium-photo/close-up-wood_1048944-27008088.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Sour Candy",
+            "description": "Tangy and sour candy for a burst of flavor.",
+            "price": 3.49,
+            "image": "https://img.freepik.com/premium-photo/close-up-multi-colored-candies-against-white-background_1048944-10125963.jpg?semt=ais_hybrid"
+        },
+        {
+            "name": "Candy Corn",
+            "description": "Classic Halloween candy with a sweet taste.",
+            "price": 2.49,
+            "image": "https://img.freepik.com/free-photo/delicious-candy-bowl_23-2150707467.jpg?semt=ais_hybrid"
         }
     ]
 }
