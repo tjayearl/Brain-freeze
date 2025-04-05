@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Checkout</h1>
+</header>
+
+<main>
+    <h2>Your Cart</h2>
+    <div id="checkout-items"></div>
+    <p>Total: <span id="total-price">$0</span></p>
+
+    <h2>Payment Method</h2>
+    <select id="payment-method">
+        <option value="card">Credit/Debit Card</option>
+        <option value="cash">Cash</option>
+        <option value="cheque">Cheque</option>
+    </select>
+
+    <button id="pay-button">Pay Now</button>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const checkoutContainer = document.getElementById("checkout-items");
+        const totalPriceElement = document.getElementById("total-price");
+
+        let totalPrice = 0;
+
+        checkoutContainer.innerHTML = cart.map(item => {
+            totalPrice += item.price;
+            return `<div>${item.name} - $${item.price}</div>`;
+        }).join("");
+
+        totalPriceElement.textContent = `$${totalPrice}`;
+
+        document.getElementById("pay-button").addEventListener("click", () => {
+            alert("Payment Successful!");
+            localStorage.removeItem("cart");
+            window.location.href = "index.html";
+        });
+    });
+</script>
+
+</body>
+</html>

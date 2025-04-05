@@ -6,10 +6,10 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-}
-
-/* Header Styles */
-header {
+  }
+  
+  /* Header Styles */
+  header {
     background-color: #ff69b4;
     color: white;
     padding: 15px;
@@ -22,80 +22,80 @@ header {
     left: 0;
     z-index: 1000;
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-}
-
-h1 {
+  }
+  
+  h1 {
     margin-left: 20px;
-}
-
-/* Navigation */
-nav ul {
+  }
+  
+  /* Navigation */
+  nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-}
-
-nav ul li {
+  }
+  
+  nav ul li {
     margin: 0 15px;
-}
-
-nav ul li a {
+  }
+  
+  nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-}
-
-/* Social Media Icons */
-.social-icons {
+  }
+  
+  /* Social Media Icons */
+  .social-icons {
     display: flex;
     gap: 10px;
     margin-right: 20px;
-}
-
-.social-icons img {
+  }
+  
+  .social-icons img {
     width: 40px;
     height: 40px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.social-icons img:hover {
+  }
+  
+  .social-icons img:hover {
     transform: scale(1.1);
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Category Sections */
-.category {
+  }
+  
+  /* Category Sections */
+  .category {
     padding: 60px 20px;
     margin: 80px 0;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#ice-cream {
+  }
+  
+  #ice-cream {
     background-color: #cce7ff;
     border: 2px solid #ff69b4;
-}
-
-#chocolate {
+  }
+  
+  #chocolate {
     background-color: #f7d1d1;
     border: 2px solid #d25d5d;
-}
-
-#candy {
+  }
+  
+  #candy {
     background-color: #fdf4c3;
     border: 2px solid #ffdb58;
-}
-
-/* Product Grid */
-.products {
+  }
+  
+  /* Product Grid */
+  .products {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-}
-
-.product {
+  }
+  
+  .product {
     background-color: white;
     border-radius: 10px;
     margin: 15px;
@@ -103,55 +103,81 @@ nav ul li a {
     width: 200px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.product:hover {
+  }
+  
+  .product:hover {
     transform: scale(1.05);
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Product Images */
-.product img, .cart-button img {
+  }
+  
+  .product img,
+  .cart-button img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.product img:hover, .cart-button img:hover {
+  }
+  
+  .product img:hover,
+  .cart-button img:hover {
     transform: scale(1.1);
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Product Text */
-.product h3 {
+  }
+  
+  .product h3 {
     color: #ff69b4;
-}
-
-.product span {
+  }
+  
+  .product span {
     font-weight: bold;
     color: #007bff;
     display: block;
     margin-bottom: 10px;
-}
-
-/* Cart Button */
-.cart-button {
+  }
+  
+  .cart-button {
     background: none;
     border: none;
     cursor: pointer;
     margin-top: 10px auto;
-}
-
-.cart-button img {
+  }
+  
+  .cart-button img {
     width: 40px;
     height: 40px;
-}
-
-/* Adjust Main Content to Avoid Header Overlap */
-main {
+  }
+  
+  /* Adjust Main Content to Avoid Header Overlap */
+  main {
     padding-top: 80px;
-}
-
+  }
+  
+  /* Checkout Section */
+  .checkout-section {
+    background-color: #e0f7fa;
+    padding: 40px;
+    margin: 50px auto;
+    border-top: 3px solid #ff69b4;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 800px;
+  }
+  
+  .go-to-checkout {
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .go-to-checkout:hover {
+    background-color: #0056b3;
+  }
+  
