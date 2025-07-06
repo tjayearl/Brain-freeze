@@ -6,10 +6,10 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-  }
-  
-  /* Header Styles */
-  header {
+}
+
+/* Header Styles */
+header {
     background-color: #ff69b4;
     color: white;
     padding: 15px;
@@ -22,80 +22,80 @@ body {
     left: 0;
     z-index: 1000;
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  }
-  
-  h1 {
+}
+
+h1 {
     margin-left: 20px;
-  }
-  
-  /* Navigation */
-  nav ul {
+}
+
+/* Navigation */
+nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-  }
-  
-  nav ul li {
+}
+
+nav ul li {
     margin: 0 15px;
-  }
-  
-  nav ul li a {
+}
+
+nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-  }
-  
-  /* Social Media Icons */
-  .social-icons {
+}
+
+/* Social Media Icons */
+.social-icons {
     display: flex;
     gap: 10px;
     margin-right: 20px;
-  }
-  
-  .social-icons img {
+}
+
+.social-icons img {
     width: 40px;
     height: 40px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  
-  .social-icons img:hover {
+}
+
+.social-icons img:hover {
     transform: scale(1.1);
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Category Sections */
-  .category {
+}
+
+/* Category Sections */
+.category {
     padding: 60px 20px;
     margin: 80px 0;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  #ice-cream {
+}
+
+#ice-cream {
     background-color: #cce7ff;
     border: 2px solid #ff69b4;
-  }
-  
-  #chocolate {
+}
+
+#chocolate {
     background-color: #f7d1d1;
     border: 2px solid #d25d5d;
-  }
-  
-  #candy {
+}
+
+#candy {
     background-color: #fdf4c3;
     border: 2px solid #ffdb58;
-  }
-  
-  /* Product Grid */
-  .products {
+}
+
+/* Product Grid */
+.products {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-  }
-  
-  .product {
+}
+
+.product {
     background-color: white;
     border-radius: 10px;
     margin: 15px;
@@ -103,81 +103,145 @@ body {
     width: 200px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  
-  .product:hover {
+}
+
+.product:hover {
     transform: scale(1.05);
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .product img,
-  .cart-button img {
+}
+
+/* Product Images */
+.product img, .cart-button img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  
-  .product img:hover,
-  .cart-button img:hover {
+}
+
+.product img:hover, .cart-button img:hover {
     transform: scale(1.1);
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .product h3 {
+}
+
+/* Product Text */
+.product h3 {
     color: #ff69b4;
-  }
-  
-  .product span {
+}
+
+.product span {
     font-weight: bold;
     color: #007bff;
     display: block;
     margin-bottom: 10px;
-  }
-  
-  .cart-button {
+}
+
+/* Cart Button */
+.cart-button {
     background: none;
     border: none;
     cursor: pointer;
     margin-top: 10px auto;
-  }
-  
-  .cart-button img {
+}
+
+.cart-button img {
     width: 40px;
     height: 40px;
-  }
-  
-  /* Adjust Main Content to Avoid Header Overlap */
-  main {
-    padding-top: 80px;
-  }
-  
-  /* Checkout Section */
-  .checkout-section {
-    background-color: #e0f7fa;
-    padding: 40px;
-    margin: 50px auto;
-    border-top: 3px solid #ff69b4;
+}
+
+/* Checkout Section */
+#checkout {
+    background-color: #e0d4fc;
+    border: 2px dashed #ff69b4;
+    padding: 20px;
+}
+
+#cart-items {
+    margin-top: 20px;
+    text-align: left;
+    padding: 10px;
+    background: white;
     border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 800px;
-  }
-  
-  .go-to-checkout {
-    padding: 12px 25px;
-    background-color: #007bff;
-    color: white;
+}
+
+/* Adjust Main Content to Avoid Header Overlap */
+main {
+    padding-top: 80px;
+}
+
+/* Style for the checkout link to look like a button */
+.checkout-link-button {
+    background-color: #fff;
+    color: #ff69b4;
+    padding: 10px 15px;
+    border: 2px solid #ff69b4;
+    border-radius: 5px;
+    text-decoration: none;
     font-weight: bold;
-    border: none;
-    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .go-to-checkout:hover {
-    background-color: #0056b3;
-  }
+    transition: background-color 0.3s, color 0.3s;
+    margin-right: 20px;
+}
+
+.checkout-link-button:hover {
+    background-color: #ff69b4;
+    color: #fff;
+}
+
+/* --- Responsive Styles --- */
+
+/* For Tablets */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        position: static; /* Remove fixed position */
+        height: auto;
+        padding: 10px;
+    }
+
+    main {
+        padding-top: 20px; /* Adjust padding since header is not fixed */
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    .social-icons {
+        margin-top: 10px;
+        margin-right: 0;
+    }
+}
+
+/* For Phones */
+@media (max-width: 480px) {
+    h1 {
+        margin-left: 0;
+    }
+
+    .product {
+        width: 80%; /* Make products take more width */
+        margin: 15px 0;
+    }
+}
+
+/* Footer Styles */
+.site-footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 5px 0;
+}
   

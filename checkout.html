@@ -34,13 +34,17 @@
         const totalPriceElement = document.getElementById("total-price");
 
         let totalPrice = 0;
+        
+        if (cart.length === 0) {
+            checkoutContainer.innerHTML = "<p>Your cart is empty.</p>";
+        } else {
+            checkoutContainer.innerHTML = cart.map(item => {
+                totalPrice += item.price; // This will now work correctly
+                return `<div>${item.name} - $${item.price.toFixed(2)}</div>`; // Use toFixed(2) for consistent display
+            }).join("");
+        }
 
-        checkoutContainer.innerHTML = cart.map(item => {
-            totalPrice += item.price;
-            return `<div>${item.name} - $${item.price}</div>`;
-        }).join("");
-
-        totalPriceElement.textContent = `$${totalPrice}`;
+        totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`; // Use toFixed(2) to prevent floating point issues
 
         document.getElementById("pay-button").addEventListener("click", () => {
             alert("Payment Successful!");
@@ -49,6 +53,11 @@
         });
     });
 </script>
+
+<footer class="site-footer">
+    <p>&copy; 2024 Brain Freeze. All rights reserved.</p>
+    <p>Property of Tjay Earl</p>
+</footer>
 
 </body>
 </html>
