@@ -18,14 +18,49 @@
         .confirmation-container h1 {
             color: #ff69b4;
         }
-        .confirmation-container a {
+        .confirmation-actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .confirmation-actions a,
+        .confirmation-actions button {
             display: inline-block;
-            margin-top: 20px;
             padding: 10px 20px;
             background-color: #ff69b4;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s;
+        }
+        .confirmation-actions a:hover,
+        .confirmation-actions button:hover {
+            background-color: #e0559d;
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .confirmation-container, .confirmation-container * {
+                visibility: visible;
+            }
+            .confirmation-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+            }
+            .confirmation-actions {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -34,11 +69,20 @@
         <h1>✅ Thank You For Your Purchase!</h1>
         <p>Your order has been placed successfully.</p>
         <p>Your order number is: <strong id="order-id"></strong></p>
+        <p>Estimated delivery: <strong id="delivery-estimate"></strong></p>
         <p>A confirmation email has been sent to you.</p>
-        <a href="index.html">Continue Shopping</a>
+        <div class="confirmation-actions">
+            <a href="index.html">Continue Shopping</a>
+            <button id="print-receipt-btn">Print Receipt</button>
+        </div>
     </div>
     <script>
         document.getElementById('order-id').textContent = localStorage.getItem('lastOrder') || 'N/A';
+        document.getElementById('delivery-estimate').textContent = localStorage.getItem('deliveryEstimate') || 'Not available';
+
+        document.getElementById('print-receipt-btn').addEventListener('click', () => {
+            window.print();
+        });
     </script>
 </body>
 </html>

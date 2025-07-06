@@ -12,12 +12,25 @@
         <h1>Secure Checkout</h1>
     </header>
 
+    <div class="progress-bar">
+        <div class="step active"><span>1</span> Cart & Details</div>
+        <div class="step"><span>2</span> Confirmation</div>
+    </div>
+
     <main class="checkout-main">
         <div class="order-summary-column">
             <!-- 1. Shopping Cart Overview -->
             <h2>🛒 Your Cart</h2>
             <div id="cart-summary">
                 <!-- Items will be dynamically inserted here -->
+            </div>
+            <div class="promo-code-section">
+                <label for="promo-code">Have a discount code?</label>
+                <div class="promo-input-group">
+                    <input type="text" id="promo-code" name="promo-code" placeholder="Enter code">
+                    <button id="apply-promo-btn">Apply</button>
+                </div>
+                <p id="promo-message"></p>
             </div>
             <div class="totals">
                 <p>Subtotal: <span id="subtotal-price">$0.00</span></p>
@@ -30,6 +43,7 @@
 
         <div class="customer-details-column">
             <form id="checkout-form">
+                <p class="login-prompt">Returning customer? <a href="#">Log in for faster checkout</a></p>
                 <!-- 2. Customer Information -->
                 <fieldset>
                     <legend>👤 Customer Information</legend>
@@ -109,6 +123,7 @@
             const taxAmountElement = document.getElementById("tax-amount");
             const deliveryMethodSelect = document.getElementById("delivery-method");
             const checkoutForm = document.getElementById("checkout-form");
+            let discountAmount = 0;
 
             const shippingOptions = {
                 standard: { cost: 5.00, time: "5-7 business days" },
@@ -125,11 +140,13 @@
             const updateTotals = () => {
                 let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 const selectedMethod = deliveryMethodSelect.value;
+                const discountedSubtotal = subtotal - discountAmount;
                 const shippingCost = cart.length > 0 ? shippingOptions[selectedMethod].cost : 0;
-                const taxAmount = subtotal * TAX_RATE;
-                const total = subtotal + shippingCost + taxAmount;
+                const taxAmount = discountedSubtotal * TAX_RATE;
+                const total = discountedSubtotal + shippingCost + taxAmount;
 
                 subtotalPriceElement.textContent = `$${subtotal.toFixed(2)}`;
+                // You could add a row to display the discount amount here if desired
                 shippingCostElement.textContent = `$${shippingCost.toFixed(2)}`;
                 taxAmountElement.textContent = `$${taxAmount.toFixed(2)}`;
                 totalPriceElement.textContent = `$${total.toFixed(2)}`;
@@ -185,6 +202,29 @@
 
             deliveryMethodSelect.addEventListener("change", updateTotals);
 
+            // --- Promo Code Logic ---
+            const applyPromoBtn = document.getElementById('apply-promo-btn');
+            const promoCodeInput = document.getElementById('promo-code');
+            const promoMessage = document.getElementById('promo-message');
+
+            applyPromoBtn.addEventListener('click', () => {
+                const code = promoCodeInput.value.trim().toUpperCase();
+                if (code === 'SAVE10') {
+                    let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    discountAmount = subtotal * 0.10; // 10% discount
+                    promoMessage.textContent = `Success! 10% discount applied.`;
+                    promoMessage.style.color = 'green';
+                    applyPromoBtn.disabled = true;
+                    promoCodeInput.disabled = true;
+                } else {
+                    discountAmount = 0;
+                    promoMessage.textContent = 'Invalid promo code.';
+                    promoMessage.style.color = 'red';
+                }
+                updateTotals();
+            });
+
+
             // --- Payment Method Logic ---
             const paymentRadios = document.querySelectorAll('input[name="payment"]');
             const cardDetailsDiv = document.getElementById('card-details');
@@ -212,15 +252,44 @@
                 setTimeout(() => {
                     // In a real app, you would process payment here.
                     const orderId = `BF-${Date.now()}`;
+                    const selectedMethod = deliveryMethodSelect.value;
+                    const deliveryEstimate = shippingOptions[selectedMethod].time;
                     localStorage.setItem("lastOrder", orderId); // Store order ID for confirmation page
+                    localStorage.setItem("deliveryEstimate", deliveryEstimate); // Store delivery estimate
                     localStorage.removeItem("cart"); // Clear the cart
                     window.location.href = "confirmation.html"; // Redirect to confirmation page
                 }, 2000);
             });
 
+            // --- Header Scroll Effect ---
+            let lastScrollTop = 0;
+            const header = document.querySelector("header");
+
+            window.addEventListener("scroll", () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (scrollTop > 50) { // Start effect after scrolling a bit
+                    if (scrollTop > lastScrollTop) {
+                        // Scrolling Down
+                        header.style.opacity = '0';
+                        header.style.transform = 'translateY(-100%)';
+                    } else {
+                        // Scrolling Up
+                        header.style.opacity = '1';
+                        header.style.transform = 'translateY(0)';
+                    }
+                } else {
+                    header.style.opacity = 1;
+                    header.style.transform = "translateY(0)";
+                }
+                lastScrollTop = scrollTop;
+            });
+
             renderCart(); // Initial render
         });
     </script>
+
+<a href="#" class="support-link">💬 Need Help?</a>
 
 <footer class="site-footer">
     <p>&copy; 2024 Brain Freeze. All rights reserved.</p>
