@@ -433,4 +433,50 @@ main {
     box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
     outline: none;
 }
+
+/* Payment Options Styles */
+#payment-method-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#payment-method-options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f9f9f9;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+
+.card-details-row {
+    display: flex;
+    gap: 20px;
+}
+
+.card-details-row > div {
+    flex: 1;
+}
+
+/* Place Order Button */
+#place-order-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#place-order-button:hover {
+    background-color: #e0559d;
+}
   
