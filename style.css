@@ -6,6 +6,9 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full viewport height */
 }
 
 /* Header Styles */
@@ -21,6 +24,7 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Adds a subtle shadow for depth */
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
@@ -70,6 +74,11 @@ nav ul li a {
     margin: 80px 0;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 
+     * This property ensures that when you jump to a section using a link (e.g., #ice-cream),
+     * it leaves space at the top for the fixed header.
+     */
+    scroll-margin-top: 90px;
 }
 
 #ice-cream {
@@ -167,6 +176,7 @@ nav ul li a {
 
 /* Adjust Main Content to Avoid Header Overlap */
 main {
+    flex-grow: 1; /* Allow main content to expand and push footer down */
     padding-top: 80px;
 }
 
@@ -243,5 +253,174 @@ main {
 
 .site-footer p {
     margin: 5px 0;
+}
+
+/* --- Checkout Page Specific Styles --- */
+.checkout-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 40px auto; /* Adds space above and below, and centers horizontally */
+    text-align: left;
+}
+
+.order-summary-column, .customer-details-column {
+    flex: 1;
+    min-width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+    border: 1px solid #e0e0e0; /* Adds a clean border */
+}
+
+.order-summary-column h2, .customer-details-column h2 {
+    color: #ff69b4;
+    border-bottom: 2px solid #f0e6ff;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* Cart Summary Styles */
+#cart-summary {
+    border-radius: 8px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.item-details .item-name {
+    font-weight: bold;
+    margin: 0;
+}
+
+.item-details .item-price {
+    font-size: 0.9em;
+    color: #666;
+    margin: 4px 0 0 0;
+}
+
+.item-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.quantity-controls span {
+    padding: 0 12px;
+    font-weight: bold;
+}
+
+.quantity-btn, .remove-btn {
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 1em;
+    line-height: 1;
+}
+
+.quantity-btn:hover, .remove-btn:hover {
+    background-color: #ddd;
+}
+
+.remove-btn {
+    background-color: #f7d1d1;
+    color: #d25d5d;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.item-subtotal {
+    font-weight: bold;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* Totals Section */
+.totals {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #f0e6ff;
+}
+
+.totals p {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.totals hr {
+    border: none;
+    border-top: 1px dashed #333;
+}
+
+.totals p strong {
+    font-size: 1.2em;
+}
+
+/* Responsive adjustments for checkout page */
+@media (max-width: 768px) {
+    .checkout-main {
+        flex-direction: column;
+    }
+}
+
+/* --- Checkout Form Styles --- */
+#checkout-form fieldset {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#checkout-form legend {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+    padding: 0 10px;
+}
+
+#checkout-form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#checkout-form input[type="text"],
+#checkout-form input[type="email"],
+#checkout-form input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Important for padding and width */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#checkout-form input:focus {
+    border-color: #ff69b4;
+    box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+    outline: none;
 }
   

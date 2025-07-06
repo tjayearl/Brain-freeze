@@ -57,7 +57,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const name = productCard.dataset.name;
             const price = parseFloat(productCard.dataset.price); // CRITICAL FIX: Parse price to a number
             const description = productCard.dataset.description;
-            cart.push({ name, price, description });
+
+            // Check if item is already in cart
+            const existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity += 1; // Increase quantity
+            } else {
+                cart.push({ name, price, description, quantity: 1 }); // Add new item with quantity 1
+            }
+
             localStorage.setItem("cart", JSON.stringify(cart)); // Save cart to localStorage
             alert(`${name} added to cart`);
         }

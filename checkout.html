@@ -8,51 +8,119 @@
 </head>
 <body>
 
-<header>
-    <h1>Checkout</h1>
-</header>
+    <header>
+        <h1>Secure Checkout</h1>
+    </header>
 
-<main>
-    <h2>Your Cart</h2>
-    <div id="checkout-items"></div>
-    <p>Total: <span id="total-price">$0</span></p>
+    <main class="checkout-main">
+        <div class="order-summary-column">
+            <!-- 1. Shopping Cart Overview -->
+            <h2>🛒 Your Cart</h2>
+            <div id="cart-summary">
+                <!-- Items will be dynamically inserted here -->
+            </div>
+            <div class="totals">
+                <p>Subtotal: <span id="subtotal-price">$0.00</span></p>
+                <p>Shipping: <span id="shipping-cost">$0.00</span></p>
+                <hr>
+                <p><strong>Total: <span id="total-price">$0.00</span></strong></p>
+            </div>
+        </div>
 
-    <h2>Payment Method</h2>
-    <select id="payment-method">
-        <option value="card">Credit/Debit Card</option>
-        <option value="cash">Cash</option>
-        <option value="cheque">Cheque</option>
-    </select>
+        <div class="customer-details-column">
+            <form id="checkout-form">
+                <!-- 2. Customer Information -->
+                <fieldset>
+                    <legend>👤 Customer Information</legend>
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full-name" required>
 
-    <button id="pay-button">Pay Now</button>
-</main>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const checkoutContainer = document.getElementById("checkout-items");
-        const totalPriceElement = document.getElementById("total-price");
+                    <label for="phone">Phone Number (Optional)</label>
+                    <input type="tel" id="phone" name="phone">
+                </fieldset>
+            </form>
+        </div>
+    </main>
 
-        let totalPrice = 0;
-        
-        if (cart.length === 0) {
-            checkoutContainer.innerHTML = "<p>Your cart is empty.</p>";
-        } else {
-            checkoutContainer.innerHTML = cart.map(item => {
-                totalPrice += item.price; // This will now work correctly
-                return `<div>${item.name} - $${item.price.toFixed(2)}</div>`; // Use toFixed(2) for consistent display
-            }).join("");
-        }
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartContainer = document.getElementById("cart-summary");
+            const subtotalPriceElement = document.getElementById("subtotal-price");
+            const shippingCostElement = document.getElementById("shipping-cost");
+            const totalPriceElement = document.getElementById("total-price");
+            const shippingCost = 5.00; // Example fixed shipping cost
 
-        totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`; // Use toFixed(2) to prevent floating point issues
+            const updateCart = (newCart) => {
+                cart = newCart;
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart();
+            };
 
-        document.getElementById("pay-button").addEventListener("click", () => {
-            alert("Payment Successful!");
-            localStorage.removeItem("cart");
-            window.location.href = "index.html";
+            const renderCart = () => {
+                cartContainer.innerHTML = "";
+                let subtotal = 0;
+
+                if (cart.length === 0) {
+                    cartContainer.innerHTML = "<p>Your cart is empty. <a href='index.html'>Continue Shopping</a></p>";
+                    subtotalPriceElement.textContent = "$0.00";
+                    shippingCostElement.textContent = "$0.00";
+                    totalPriceElement.textContent = "$0.00";
+                    return;
+                }
+
+                cart.forEach((item, index) => {
+                    const itemSubtotal = item.price * item.quantity;
+                    subtotal += itemSubtotal;
+
+                    const itemElement = document.createElement("div");
+                    itemElement.classList.add("cart-item");
+                    itemElement.innerHTML = `
+                        <div class="item-details">
+                            <p class="item-name">${item.name}</p>
+                            <p class="item-price">$${item.price.toFixed(2)} per item</p>
+                        </div>
+                        <div class="item-controls">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
+                            </div>
+                            <p class="item-subtotal">$${itemSubtotal.toFixed(2)}</p>
+                            <button class="remove-btn" data-index="${index}">Remove</button>
+                        </div>
+                    `;
+                    cartContainer.appendChild(itemElement);
+                });
+
+                const total = subtotal + shippingCost;
+                subtotalPriceElement.textContent = `$${subtotal.toFixed(2)}`;
+                shippingCostElement.textContent = `$${shippingCost.toFixed(2)}`;
+                totalPriceElement.textContent = `$${total.toFixed(2)}`;
+            };
+
+            cartContainer.addEventListener("click", (e) => {
+                if (!e.target.dataset.index) return; // Exit if the clicked element is not a button with an index
+                const index = parseInt(e.target.dataset.index, 10);
+                let newCart = [...cart];
+
+                if (e.target.classList.contains("quantity-btn")) {
+                    const action = e.target.dataset.action;
+                    if (action === "increase") newCart[index].quantity++;
+                    else if (action === "decrease" && newCart[index].quantity > 1) newCart[index].quantity--;
+                    else newCart.splice(index, 1); // Remove if quantity is 1 and decrease is clicked
+                } else if (e.target.classList.contains("remove-btn")) {
+                    newCart.splice(index, 1);
+                }
+                updateCart(newCart);
+            });
+
+            renderCart(); // Initial render
         });
-    });
-</script>
+    </script>
 
 <footer class="site-footer">
     <p>&copy; 2024 Brain Freeze. All rights reserved.</p>
