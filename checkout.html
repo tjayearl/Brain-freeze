@@ -43,7 +43,7 @@
 
         <div class="customer-details-column">
             <form id="checkout-form">
-                <p class="login-prompt">Returning customer? <a href="#">Log in for faster checkout</a></p>
+                <p class="login-prompt">Returning customer? <a href="#" id="login-link">Log in for faster checkout</a></p>
                 <!-- 2. Customer Information -->
                 <fieldset>
                     <legend>👤 Customer Information</legend>
@@ -112,6 +112,22 @@
             </form>
         </div>
     </main>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Login</h2>
+            <p>Log in to use saved details for a faster checkout.</p>
+            <form id="login-form">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" name="login-email" required>
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="login-password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -283,6 +299,34 @@
                     header.style.transform = "translateY(0)";
                 }
                 lastScrollTop = scrollTop;
+            });
+
+            // --- Login Modal Logic ---
+            const loginLink = document.getElementById('login-link');
+            const loginModal = document.getElementById('login-modal');
+            const closeBtn = document.querySelector('.modal .close-btn');
+            const loginForm = document.getElementById('login-form');
+
+            loginLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.style.display = 'flex';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target == loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            });
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Login successful! (This is a demo)');
+                // In a real app, you would fetch user data and populate the form.
+                loginModal.style.display = 'none';
             });
 
             renderCart(); // Initial render
