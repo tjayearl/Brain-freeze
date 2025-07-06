@@ -479,4 +479,29 @@ main {
 #place-order-button:hover {
     background-color: #e0559d;
 }
+
+/* Loading spinner on button */
+#place-order-button.loading {
+    background-color: #e0559d;
+    cursor: not-allowed;
+}
+
+#place-order-button.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
   

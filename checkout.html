@@ -22,6 +22,7 @@
             <div class="totals">
                 <p>Subtotal: <span id="subtotal-price">$0.00</span></p>
                 <p>Shipping: <span id="shipping-cost">$0.00</span></p>
+                <p>Taxes: <span id="tax-amount">$0.00</span></p>
                 <hr>
                 <p><strong>Total: <span id="total-price">$0.00</span></strong></p>
             </div>
@@ -105,6 +106,7 @@
             const subtotalPriceElement = document.getElementById("subtotal-price");
             const shippingCostElement = document.getElementById("shipping-cost");
             const totalPriceElement = document.getElementById("total-price");
+            const taxAmountElement = document.getElementById("tax-amount");
             const deliveryMethodSelect = document.getElementById("delivery-method");
             const checkoutForm = document.getElementById("checkout-form");
 
@@ -112,6 +114,7 @@
                 standard: { cost: 5.00, time: "5-7 business days" },
                 express: { cost: 15.00, time: "1-2 business days" }
             };
+            const TAX_RATE = 0.08; // 8% tax rate
 
             const updateCart = (newCart) => {
                 cart = newCart;
@@ -123,10 +126,12 @@
                 let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 const selectedMethod = deliveryMethodSelect.value;
                 const shippingCost = cart.length > 0 ? shippingOptions[selectedMethod].cost : 0;
-                const total = subtotal + shippingCost;
+                const taxAmount = subtotal * TAX_RATE;
+                const total = subtotal + shippingCost + taxAmount;
 
                 subtotalPriceElement.textContent = `$${subtotal.toFixed(2)}`;
                 shippingCostElement.textContent = `$${shippingCost.toFixed(2)}`;
+                taxAmountElement.textContent = `$${taxAmount.toFixed(2)}`;
                 totalPriceElement.textContent = `$${total.toFixed(2)}`;
             };
 
@@ -197,11 +202,20 @@
                     alert("Your cart is empty. Please add items before placing an order.");
                     return;
                 }
-                // In a real app, you would process payment here.
-                const orderId = `BF-${Date.now()}`;
-                localStorage.setItem("lastOrder", orderId); // Store order ID for confirmation page
-                localStorage.removeItem("cart"); // Clear the cart
-                window.location.href = "confirmation.html"; // Redirect to confirmation page
+
+                const placeOrderButton = document.getElementById('place-order-button');
+                placeOrderButton.disabled = true;
+                placeOrderButton.classList.add('loading');
+                placeOrderButton.textContent = 'Processing';
+
+                // Simulate network delay for 2 seconds before redirecting
+                setTimeout(() => {
+                    // In a real app, you would process payment here.
+                    const orderId = `BF-${Date.now()}`;
+                    localStorage.setItem("lastOrder", orderId); // Store order ID for confirmation page
+                    localStorage.removeItem("cart"); // Clear the cart
+                    window.location.href = "confirmation.html"; // Redirect to confirmation page
+                }, 2000);
             });
 
             renderCart(); // Initial render
