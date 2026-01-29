@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <header>
         <h1>Secure Checkout</h1>
@@ -141,6 +144,19 @@
             const checkoutForm = document.getElementById("checkout-form");
             let discountAmount = 0;
 
+            function animateNumber(el, start, end, duration = 400) {
+                const startTime = performance.now();
+
+                function update(time) {
+                    const progress = Math.min((time - startTime) / duration, 1);
+                    const value = start + (end - start) * progress;
+                    el.textContent = `$${value.toFixed(2)}`;
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+
+                requestAnimationFrame(update);
+            }
+
             const shippingOptions = {
                 standard: { cost: 5.00, time: "5-7 business days" },
                 express: { cost: 15.00, time: "1-2 business days" }
@@ -165,7 +181,7 @@
                 // You could add a row to display the discount amount here if desired
                 shippingCostElement.textContent = `$${shippingCost.toFixed(2)}`;
                 taxAmountElement.textContent = `$${taxAmount.toFixed(2)}`;
-                totalPriceElement.textContent = `$${total.toFixed(2)}`;
+                animateNumber(totalPriceElement, parseFloat(totalPriceElement.textContent.replace('$','')) || 0, total);
             };
 
             const renderCart = () => {
@@ -225,19 +241,29 @@
 
             applyPromoBtn.addEventListener('click', () => {
                 const code = promoCodeInput.value.trim().toUpperCase();
-                if (code === 'SAVE10') {
-                    let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                    discountAmount = subtotal * 0.10; // 10% discount
-                    promoMessage.textContent = `Success! 10% discount applied.`;
-                    promoMessage.style.color = 'green';
-                    applyPromoBtn.disabled = true;
-                    promoCodeInput.disabled = true;
-                } else {
-                    discountAmount = 0;
-                    promoMessage.textContent = 'Invalid promo code.';
-                    promoMessage.style.color = 'red';
-                }
-                updateTotals();
+                
+                // Loading State
+                const originalText = applyPromoBtn.textContent;
+                applyPromoBtn.textContent = "Checking...";
+                applyPromoBtn.disabled = true;
+
+                setTimeout(() => {
+                    if (code === 'SAVE10') {
+                        let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                        discountAmount = subtotal * 0.10; // 10% discount
+                        promoMessage.textContent = `Success! 10% discount applied.`;
+                        promoMessage.style.color = 'green';
+                        promoCodeInput.disabled = true;
+                        applyPromoBtn.textContent = "Applied";
+                    } else {
+                        discountAmount = 0;
+                        promoMessage.textContent = 'Invalid promo code.';
+                        promoMessage.style.color = 'red';
+                        applyPromoBtn.disabled = false;
+                        applyPromoBtn.textContent = originalText;
+                    }
+                    updateTotals();
+                }, 800); // Fake network delay
             });
 
 
@@ -330,6 +356,59 @@
             });
 
             renderCart(); // Initial render
+
+            // --- Custom Cursor Logic ---
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+
+            if (cursorDot && cursorOutline && window.matchMedia("(pointer: fine)").matches) {
+                let mouseX = 0, mouseY = 0;
+                let outlineX = 0, outlineY = 0;
+
+                window.addEventListener('mousemove', e => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    
+                    cursorDot.style.left = `${mouseX}px`;
+                    cursorDot.style.top = `${mouseY}px`;
+                });
+
+                const animateCursor = () => {
+                    outlineX += (mouseX - outlineX) * 0.15;
+                    outlineY += (mouseY - outlineY) * 0.15;
+                    
+                    cursorOutline.style.left = `${outlineX}px`;
+                    cursorOutline.style.top = `${outlineY}px`;
+                    
+                    requestAnimationFrame(animateCursor);
+                };
+                animateCursor();
+
+                document.addEventListener('mouseover', (e) => {
+                    // Add hover-action for inputs too on checkout
+                    if (e.target.closest('a, button, input, select')) {
+                        document.body.classList.add('hover-action');
+                    }
+                    if (e.target.closest('.remove-btn')) {
+                        document.body.classList.add('hover-danger');
+                    }
+                });
+                document.addEventListener('mouseout', () => {
+                    document.body.classList.remove('hover-action', 'hover-danger');
+                });
+                
+                // Button Ripple Effect (Copied from script.js for consistency)
+                document.addEventListener("click", e => {
+                    if (e.target.tagName === "BUTTON") {
+                        const ripple = document.createElement("span");
+                        ripple.className = "ripple";
+                        ripple.style.left = `${e.offsetX}px`;
+                        ripple.style.top = `${e.offsetY}px`;
+                        e.target.appendChild(ripple);
+                        setTimeout(() => ripple.remove(), 600);
+                    }
+                });
+            }
         });
     </script>
 

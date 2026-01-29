@@ -65,6 +65,10 @@
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <div class="confirmation-container">
         <h1>✅ Thank You For Your Purchase!</h1>
         <p>Your order has been placed successfully.</p>
@@ -77,12 +81,59 @@
         </div>
     </div>
     <script>
+        function celebrate() {
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.background = ["#ff69b4", "#7ec8ff", "#ffd966"][Math.floor(Math.random()*3)];
+                confetti.style.animationDelay = Math.random() + "s";
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
         document.getElementById('order-id').textContent = localStorage.getItem('lastOrder') || 'N/A';
         document.getElementById('delivery-estimate').textContent = localStorage.getItem('deliveryEstimate') || 'Not available';
 
         document.getElementById('print-receipt-btn').addEventListener('click', () => {
             window.print();
         });
+
+        // Let's celebrate!
+        celebrate();
+
+        // --- Custom Cursor Logic ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        if (cursorDot && cursorOutline && window.matchMedia("(pointer: fine)").matches) {
+            let mouseX = 0, mouseY = 0;
+            let outlineX = 0, outlineY = 0;
+
+            window.addEventListener('mousemove', e => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorDot.style.left = `${mouseX}px`;
+                cursorDot.style.top = `${mouseY}px`;
+            });
+
+            const animateCursor = () => {
+                outlineX += (mouseX - outlineX) * 0.15;
+                outlineY += (mouseY - outlineY) * 0.15;
+                cursorOutline.style.left = `${outlineX}px`;
+                cursorOutline.style.top = `${outlineY}px`;
+                requestAnimationFrame(animateCursor);
+            };
+            animateCursor();
+
+            document.addEventListener('mouseover', (e) => {
+                if (e.target.closest('a, button')) document.body.classList.add('hover-action');
+            });
+            document.addEventListener('mouseout', () => {
+                document.body.classList.remove('hover-action');
+            });
+        }
     </script>
 </body>
 </html>
